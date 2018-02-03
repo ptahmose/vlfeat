@@ -30,11 +30,14 @@ ARCH = win64
 DEBUG = no
 BRANCH = v$(VER)-$(ARCH)
 MSVSVER =
-MSVCROOT = $(VCINSTALLDIR)
+#MSVCROOT = $(VCINSTALLDIR)
+#MSVCROOT = $(VCToolsInstallDir)
+MSVCROOT = C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.12.25827\ 
 WINSDKROOT = $(WINDOWSSDKDIR)
 GIT = git
 
 !if "$(MSVCROOT)" == ""
+!Message Hallo $(MSVCROOT)
 MSVCROOT = C:\Program Files\Microsoft Visual Studio 10.0\VC
 !endif
 
@@ -79,17 +82,31 @@ MEXOPT = "$(MATLABROOT)\bin\win64\mexopts\msvc$(MSVSYEAR).xml"
 MEXEXT = mexw64
 MEX_FLAGS = -largeArrayDims
 
+!if $(MSVSVER) >= 140
+CC = "$(MSVCROOT)\bin\Hostx64\x64\cl.exe"
+LINK = "$(MSVCROOT)\bin\Hostx64\x64\link.exe"
+!else
 CC = "$(MSVCROOT)\bin\amd64\cl.exe"
 LINK = "$(MSVCROOT)\bin\amd64\link.exe"
+!endif
+
 !if $(MSVSVER) >= 100
 MSVCR_PATH = $(MSVCROOT)\redist\x64\Microsoft.VC$(MSVSVER).CRT
 !else
 MSVCR_PATH = $(MSVCROOT)\redist\amd64\Microsoft.VC$(MSVSVER).CRT
 !endif
 
+#LFLAGS = /MACHINE:X64 \
+#         /LIBPATH:"$(MSVCROOT)\lib\amd64" \
+#         /LIBPATH:"$(WINSDKROOT)\lib\x64"
+
 LFLAGS = /MACHINE:X64 \
-         /LIBPATH:"$(MSVCROOT)\lib\amd64" \
-         /LIBPATH:"$(WINSDKROOT)\lib\x64"
+		 /LIBPATH:"c:\Progra~2\WI3CF2~1\10\Lib\10.0.16299.0\ucrt\x64" \
+		 /LIBPATH:"c:\Progra~2\WI3CF2~1\10\Lib\10.0.16299.0\um\x64"  \
+		 /LIBPATH:"C:\Progra~2\Micros~1.0\VC\lib\amd64"
+#		 /LIBPATH:$(WindowsSdkDir)\Lib\$(WindowsSDKLibVersion)\ucrt\x64 \
+#		 /LIBPATH:$(WindowsSdkDir)\Lib\$(WindowsSDKLibVersion)\um\x64
+		 
 !else
 !error ARCH = $(ARCH) is an unknown architecture.
 !endif
