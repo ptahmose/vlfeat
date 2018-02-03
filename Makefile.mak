@@ -47,7 +47,7 @@ WINSDKROOT = C:\Program Files\Microsoft SDKs\Windows\v7.0A
 
 !include make/nmake_helper.mak
 
-MATLABROOT = C:\Program Files\MATLAB\R2017a
+MATLABROOT = C:\Program Files\MATLAB\R2017b
 MATLABVER = 90200
 MEX = "$(MATLABROOT)\bin\mex.bat"
 
@@ -101,9 +101,9 @@ MSVCR_PATH = $(MSVCROOT)\redist\amd64\Microsoft.VC$(MSVSVER).CRT
 #         /LIBPATH:"$(WINSDKROOT)\lib\x64"
 
 LFLAGS = /MACHINE:X64 \
-		 /LIBPATH:"c:\Progra~2\WI3CF2~1\10\Lib\10.0.16299.0\ucrt\x64" \
-		 /LIBPATH:"c:\Progra~2\WI3CF2~1\10\Lib\10.0.16299.0\um\x64"  \
-		 /LIBPATH:"C:\Progra~2\Micros~1.0\VC\lib\amd64"
+		 /LIBPATH:"c:\Program Files (x86)\Windows Kits\10\Lib\10.0.16299.0\ucrt\x64" \
+		 /LIBPATH:"c:\Program Files (x86)\Windows Kits\10\Lib\10.0.16299.0\um\x64"  \
+		 /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64"
 #		 /LIBPATH:$(WindowsSdkDir)\Lib\$(WindowsSDKLibVersion)\ucrt\x64 \
 #		 /LIBPATH:$(WindowsSdkDir)\Lib\$(WindowsSDKLibVersion)\um\x64
 		 
